@@ -1,0 +1,32 @@
+---
+- name: Prepare Ubuntu servers for NFS mounts
+  hosts: all
+  become: true
+  vars:
+    # How long apt’s cache is considered valid (in seconds)
+    apt_cache_valid_time: 3600
+
+  tasks:
+    - name: Ensure apt cache is up to date
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: "{{ apt_cache_valid_time }}"
+
+    - name: Install NFS client packages
+      ansible.builtin.apt:
+        name:
+          - nfs-common    # NFS utilities (mount.nfs, lockd, etc.)
+          - rpcbind       # RPC portmapper for NFSv3/4
+        state: present
+
+    - name: Ensure rpcbind service is enabled and running
+      ansible.builtin.service:
+        name: rpcbind
+        state: started
+        enabled: true
+
+    - name: Ensure nfs-client.target is enabled
+      ansible.builtin.systemd:
+        name: nfs-client.target
+        state: started
+        enabled: true
