@@ -1,0 +1,44 @@
+{{- range .Values.applications }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name }}
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: {{ .namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    targetRevision: HEAD
+
+    # === Logic for Helm chart from an external repo ===
+    {{- if eq .type "helm-repo" }}
+    repoURL: {{ .repo }}
+    chart: {{ .chart }}
+    targetRevision: {{ .version }}
+    helm:
+      values: |
+        {{- toYaml .values | nindent 8 }}
+    {{- end }}
+
+    # === Logic for Helm chart from the Git repo ===
+    {{- if eq .type "helm-git" }}
+    repoURL: 'https://github.com/hmalin/homelab.git'
+    path: {{ .path }}
+    helm: {}
+    {{- end }}
+
+    # === Logic for plain YAML files from the Git repo ===
+    {{- if eq .type "plain-git" }}
+    repoURL: 'https://github.com/hmalin/homelab.git'
+    path: {{ .path }}
+    {{- end }}
+{{- end }}

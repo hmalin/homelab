@@ -1,0 +1,44 @@
+# infra/argocd/values.yaml
+applications:
+  # Type 1: A Helm chart from the Git repo
+  - name: nginx
+    namespace: nginx-prod
+    path: argocd/clusters/prod/apps/nginx
+    type: helm-git
+
+  - name: it-tools
+    namespace: it-tools
+    path: argocd/clusters/prod/apps/it-tools
+    type: helm-git
+
+
+  # Type 2: A Helm chart from an external repo
+  - name: cert-manager
+    namespace: cert-manager
+    repo: https://charts.jetstack.io
+    chart: cert-manager
+    version: v1.18.2
+    type: helm-repo
+    values:
+      installCRDs: true
+
+  - name: nfs-provisioner
+    namespace: nfs-provisioner
+    type: helm-repo
+    repo: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+    chart: nfs-subdir-external-provisioner
+    version: 4.0.18
+    values:
+      replicaCount: 1
+      nfs:
+        server: 192.168.50.10 #NFS server IP
+        path: /volume1/.srv/.unifi-drive/kubestore/.data #NFS share path
+      storageClass:
+        name: nfs-client
+        defaultClass: true    
+
+  # Type 3: Plain YAML files from Git repo
+  - name: cluster-issuers
+    namespace: cert-manager
+    path: cluster-config/issuers
+    type: plain-git

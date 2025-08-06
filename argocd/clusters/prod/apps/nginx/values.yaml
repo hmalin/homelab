@@ -6,4 +6,4 @@ image:
 
 ingress:
   enabled: true
-  host: "nginx.malininc.com" # Cloudflare Domain
+  host: "nginx-prod.malininc.com" # Cloudflare Domain

@@ -17,9 +17,8 @@ This homelab is a self-contained environment designed for:
 - **Networking:** UniFi Dream Machine Pro SE
 - **Container Management:** Docker + Docker Compose / Kubernetes (K3s)
 - **Configuration Management:** Ansible
-- **CI/CD:** Jenkins + FluxCD
+- **CI/CD:** ARGOCD 
 - **Monitoring:** Grafana, Prometheus, InfluxDB
-- **Authentication & SSO:** Authentik
-- **Reverse Proxy:** Traefik / Nginx Proxy Manager
+- **Loadbalencer:** MetalLB + KubeVIP
 - **Storage:** UNIFI NAS (NFS/SMB)
 

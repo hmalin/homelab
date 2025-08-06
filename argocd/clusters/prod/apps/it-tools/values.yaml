@@ -6,4 +6,4 @@ image:
 
 ingress:
   enabled: true
-  host: "it-tools.malininc.com" # Cloudflare Domain
+  host: "ittools.malininc.com" # Cloudflare Domain
