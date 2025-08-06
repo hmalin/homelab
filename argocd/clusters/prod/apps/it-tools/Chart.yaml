@@ -1,0 +1,5 @@
+apiVersion: v2
+name: it-tools
+description: Collection of handy online tools for developers, with great UX
+version: 0.1.0
+appVersion: "2024.10.22-7ca5933"
