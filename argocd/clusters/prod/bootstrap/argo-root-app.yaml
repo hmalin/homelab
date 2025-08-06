@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/hmalin/homelab.git
     targetRevision: HEAD
-    path: infra/argocd
+    path: argocd/clusters/prod/infra/argocd
     helm:
       valueFiles:
         - values.yaml
