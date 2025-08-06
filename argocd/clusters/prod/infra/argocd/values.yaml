@@ -40,5 +40,5 @@ applications:
   # Type 3: Plain YAML files from Git repo
   - name: cluster-issuers
     namespace: cert-manager
-    path: cluster-config/issuers
+    path: argocd/clusters/prod/cluster-config/issuers
     type: plain-git
