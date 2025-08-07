@@ -11,6 +11,11 @@ applications:
     path: argocd/clusters/prod/apps/it-tools
     type: helm-git
 
+  - name: vllm-ai
+    namespace: vllm-ai
+    path: argocd/clusters/prod/apps/vllm-ai
+    type: helm-git  
+
 
   # Type 2: A Helm chart from an external repo
   - name: cert-manager

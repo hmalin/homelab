@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-ai
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: vllm-ai
+  template:
+    metadata:
+      labels:
+        app: vllm-ai
+    spec:
+      hostIPC: true
+      # Only schedule onto nodes labeled `gpu=true`
+      nodeSelector:
+        gpu: "true"
+      tolerations:
+        - key: "gpu"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+
+      containers:
+        - name: vllm-ai
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          args:
+            - "--model"
+            - "{{ .Values.model }}"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vllm-hf-token
+                  key: HUGGING_FACE_HUB_TOKEN
+          volumeMounts:
+            - name: huggingface-cache
+              mountPath: /root/.cache/huggingface  
+          #request one GPU
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+      volumes:
+        - name: huggingface-cache
+          persistentVolumeClaim:
+            claimName: huggingface-cache

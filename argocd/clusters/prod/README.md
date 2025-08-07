@@ -68,21 +68,6 @@ argocd
 └── clusters  
 └── prod  
 ├── apps  
-│ ├── it-tools  
-│ │ ├── Chart.yaml  
-│ │ ├── icon.svg  
-│ │ ├── templates  
-│ │ │ ├── deployment.yaml  
-│ │ │ ├── ingress.yaml  
-│ │ │ └── service.yaml  
-│ │ └── values.yaml  
-│ └── nginx  
-│ ├── Chart.yaml  
-│ ├── templates  
-│ │ ├── deployment.yaml  
-│ │ ├── ingress.yaml  
-│ │ └── service.yaml  
-│ └── values.yaml  
 ├── bootstrap  
 │ └── argo-root-app.yaml  
 ├── cluster-config  
