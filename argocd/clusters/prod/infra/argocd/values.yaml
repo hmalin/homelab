@@ -47,3 +47,8 @@ applications:
     namespace: cert-manager
     path: argocd/clusters/prod/cluster-config/issuers
     type: plain-git
+
+  - name: nvidia-device-plugin
+    namespace: kube-system
+    path: argocd/clusters/prod/infra/nvidia-device-plugin
+    type: plain-git  
