@@ -16,7 +16,7 @@ spec:
       labels:
         name: nvidia-device-plugin-ds
     spec:
-      # 1) Only run on nodes labeled gpu=true
+      # Only run on nodes labeled gpu=true
       nodeSelector:
         gpu: "true"
 
@@ -33,7 +33,6 @@ spec:
           value: "true"
           effect: NoSchedule
 
-      priorityClassName: "system-node-critical"
       containers:
       - image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
         name: nvidia-device-plugin-ctr
@@ -45,10 +44,18 @@ spec:
           capabilities:
             drop: ["ALL"]
         volumeMounts:
-        - name: device-plugin
-          mountPath: /var/lib/kubelet/device-plugins
+          - name: device-plugin
+            mountPath: /var/lib/kubelet/device-plugins
+          # mount the CDI specs from the host
+          - name: cdi
+            mountPath: /etc/cdi
+            readOnly: true
       volumes:
-      - name: device-plugin
-        hostPath:
-          path: /var/lib/kubelet/device-plugins
-
+        - name: device-plugin
+          hostPath:
+            path: /var/lib/kubelet/device-plugins
+        # the host’s CDI directory
+        - name: cdi
+          hostPath:
+            path: /etc/cdi
+            type: DirectoryOrCreate
