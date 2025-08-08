@@ -16,6 +16,8 @@ spec:
       labels:
         name: nvidia-device-plugin-ds
     spec:
+      runtimeClassName: nvidia            
+      priorityClassName: system-node-critical  # optional
       # Only run on nodes labeled gpu=true
       nodeSelector:
         gpu: "true"
