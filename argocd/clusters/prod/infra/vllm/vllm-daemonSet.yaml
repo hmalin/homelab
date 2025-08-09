@@ -27,7 +27,7 @@ spec:
               name: vllm-hf-token
         - name: VLLM_LOGGING_LEVEL
           value: DEBUG      
-        image: vllm/vllm-openai:v0.0.10
+        image: vllm/vllm-openai:v0.10.0
         name: vllm
         ports:
         - containerPort: 8000
