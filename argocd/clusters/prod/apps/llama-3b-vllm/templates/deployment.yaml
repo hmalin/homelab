@@ -27,9 +27,9 @@ spec:
       volumes:
       - name: huggingface-cache
         persistentVolumeClaim:
-          claimName: huggingface-cache
+          claimName: huggingface-cache    
       # vLLM needs to access the host's shared memory for tensor parallel inference.
-      - name: shm
+      - name: dshm
         emptyDir:
           medium: Memory
           sizeLimit: "8Gi"      
