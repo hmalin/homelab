@@ -1,8 +1,0 @@
-replicas: 1
-image:
-  repository: vllm/vllm-openai
-  tag: "v0.10.0"
-
-ingress:
-  enabled: true
-  host: "llama3-vllm.malininc.com" # Cloudflare Domain

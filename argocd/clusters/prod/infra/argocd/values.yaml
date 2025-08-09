@@ -11,12 +11,6 @@ applications:
     path: argocd/clusters/prod/apps/it-tools
     type: helm-git
 
-  - name: llama-3b-vllm
-    namespace: vllm-ai
-    path: argocd/clusters/prod/apps/llama-3b-vllm
-    type: helm-git
-
-
   # Type 2: A Helm chart from an external repo
   - name: cert-manager
     namespace: cert-manager
@@ -51,4 +45,9 @@ applications:
   - name: nvidia-device-plugin
     namespace: kube-system
     path: argocd/clusters/prod/infra/nvidia-device-plugin
-    type: plain-git  
+    type: plain-git
+
+  - name: vllm
+    namespace: vllm-ai
+    path: argocd/clusters/prod/infra/vllm
+    type: plain-git

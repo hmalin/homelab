@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: vllm-daemonset
+  namespace: vllm-ai
+spec:
+  selector:
+    matchLabels:
+      app: vllm
+  template:
+    metadata:
+      labels:
+        app: vllm
+    spec:
+      containers:
+      - args:
+        - --model
+        - unsloth/Llama-3.2-3B-Instruct
+        - --gpu-memory-utilization
+        - "0.95"
+        - --enforce-eager
+        env:
+        - name: HUGGING_FACE_HUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: HUGGING_FACE_HUB_TOKEN
+              name: vllm-hf-token
+        - name: VLLM_LOGGING_LEVEL
+          value: DEBUG      
+        image: vllm/vllm-openai:v0.0.10
+        name: vllm
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        resources:
+          limits:
+            nvidia.com/gpu: "1"
+      nodeSelector:
+        gpu: "true"
+      tolerations:
+        - key: "gpu"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+        - key: "nvidia.com/gpu"
+          operator: "Exists"
+          effect: "NoSchedule"
