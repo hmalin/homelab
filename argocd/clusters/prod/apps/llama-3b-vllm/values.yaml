@@ -3,8 +3,6 @@ image:
   repository: vllm/vllm-openai
   tag: "v0.10.0"
 
-model: meta-llama/Llama-3.2-3B-Instruct  
-
 ingress:
   enabled: true
-  host: "vllm-ai.malininc.com" # Cloudflare Domain
+  host: "llama3-vllm.malininc.com" # Cloudflare Domain

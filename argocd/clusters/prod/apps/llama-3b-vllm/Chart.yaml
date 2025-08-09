@@ -1,0 +1,6 @@
+apiVersion: v2
+name: llama-3b-vllm
+description: llama-3b served with vllm 
+type: application
+version: 0.1.0
+appVersion: "v0.10.0"

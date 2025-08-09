@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vllm-ai
+  name: llama-3b-vllm
   annotations:
     kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: "cloudflare-prod"
@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.ingress.host | quote }}
-    secretName: vllm-ai-tls
+    secretName: llama-3b-vllm-tls
   rules:
   - host: {{ .Values.ingress.host | quote }}
     http:
@@ -18,6 +18,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: vllm-ai
+            name: llama-3b-vllm
             port:
-              number: 8000
+              number: 80

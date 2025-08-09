@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: llama-3b-vllm
+spec:
+  selector:
+    app: llama-3b-vllm
+  sessionAffinity: None
+  ports:
+  - name: http-llama-3b-vllm
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  
+  

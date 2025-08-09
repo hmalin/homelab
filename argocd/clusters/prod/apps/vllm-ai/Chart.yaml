@@ -1,6 +1,0 @@
-apiVersion: v2
-name: vllm-ai
-description: VLLM inference server on k3s with NVIDIA GPU support
-type: application
-version: 0.1.0
-appVersion: "v0.10.0"

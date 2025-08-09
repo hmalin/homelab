@@ -11,10 +11,10 @@ applications:
     path: argocd/clusters/prod/apps/it-tools
     type: helm-git
 
-  - name: vllm-ai
+  - name: llama-3b-vllm
     namespace: vllm-ai
-    path: argocd/clusters/prod/apps/vllm-ai
-    type: helm-git  
+    path: argocd/clusters/prod/apps/llama-3b-vllm
+    type: helm-git
 
 
   # Type 2: A Helm chart from an external repo
