@@ -12,7 +12,6 @@ spec:
       labels:
         app: vllm-ai
     spec:
-      hostIPC: true
       # Only schedule onto nodes labeled `gpu=true`
       nodeSelector:
         gpu: "true"
@@ -21,6 +20,9 @@ spec:
           operator: "Equal"
           value: "true"
           effect: "NoSchedule"
+        - key: "nvidia.com/gpu"
+          operator: "Exists"
+          effect: "NoSchedule"  
 
       containers:
         - name: vllm-ai
@@ -38,12 +40,21 @@ spec:
                   key: HUGGING_FACE_HUB_TOKEN
           volumeMounts:
             - name: huggingface-cache
-              mountPath: /root/.cache/huggingface  
-          #request one GPU
+              mountPath: /root/.cache/huggingface
+            - name: dshm
+              mountPath: /dev/shm   
+          
           resources:
+            requests:
+              cpu: "4"
+              memory: "16Gi"
             limits:
               nvidia.com/gpu: 1
       volumes:
         - name: huggingface-cache
           persistentVolumeClaim:
             claimName: huggingface-cache
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Gi    
