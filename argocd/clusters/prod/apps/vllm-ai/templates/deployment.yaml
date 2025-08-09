@@ -12,6 +12,7 @@ spec:
       labels:
         app: vllm-ai
     spec:
+      hostIPC: true
       # Only schedule onto nodes labeled `gpu=true`
       nodeSelector:
         gpu: "true"
