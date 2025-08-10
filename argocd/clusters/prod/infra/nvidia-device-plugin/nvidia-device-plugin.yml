@@ -3,8 +3,6 @@ kind: DaemonSet
 metadata:
   name: nvidia-device-plugin-daemonset
   namespace: kube-system
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
 spec:
   selector:
     matchLabels:
@@ -16,7 +14,6 @@ spec:
       labels:
         name: nvidia-device-plugin-ds
     spec:
-      # runtimeClassName: nvidia not needed for the plugin
       priorityClassName: system-node-critical
       nodeSelector:
         gpu: "true"
@@ -32,9 +29,6 @@ spec:
         - name: nvidia-device-plugin-ctr
           image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
           imagePullPolicy: IfNotPresent
-          env:
-            - name: FAIL_ON_INIT_ERROR
-              value: "false"
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -42,16 +36,7 @@ spec:
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
-          # (Optional)
-          #  - name: cdi
-          #    mountPath: /etc/cdi
-          #    readOnly: true
       volumes:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
-        # (Optional)
-        # - name: cdi
-        #   hostPath:
-        #     path: /etc/cdi
-        #     type: DirectoryOrCreate
