@@ -12,29 +12,6 @@ spec:
       labels:
         app: vllm
     spec:
-      containers:
-      - args:
-        - --model
-        - unsloth/Llama-3.2-3B-Instruct
-        - --gpu-memory-utilization
-        - "0.95"
-        - --enforce-eager
-        env:
-        - name: HUGGING_FACE_HUB_TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: HUGGING_FACE_HUB_TOKEN
-              name: vllm-hf-token
-        - name: VLLM_LOGGING_LEVEL
-          value: DEBUG      
-        image: vllm/vllm-openai:v0.10.0
-        name: vllm
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        resources:
-          limits:
-            nvidia.com/gpu: "1"
       nodeSelector:
         gpu: "true"
       tolerations:
@@ -45,3 +22,52 @@ spec:
         - key: "nvidia.com/gpu"
           operator: "Exists"
           effect: "NoSchedule"
+      containers:
+        - name: vllm
+          image: vllm/vllm-openai:v0.10.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - --model
+            - unsloth/Llama-3.2-3B-Instruct
+            - --gpu-memory-utilization
+            - "0.95"
+            - --enforce-eager
+            # Optional: set --host 0.0.0.0 (default) and port if you change it
+            # - --host
+            # - 0.0.0.0
+            # - --port
+            # - "8000"
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vllm-hf-token
+                  key: HUGGING_FACE_HUB_TOKEN
+            - name: VLLM_LOGGING_LEVEL
+              value: DEBUG
+            # Make sure injected host driver libs (R570) are preferred
+            - name: LD_LIBRARY_PATH
+              value: "/usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}"
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          # Give vLLM a larger shared-memory segment (important for perf/stability)
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            failureThreshold: 12
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 2Gi

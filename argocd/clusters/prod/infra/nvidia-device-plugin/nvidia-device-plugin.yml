@@ -16,48 +16,42 @@ spec:
       labels:
         name: nvidia-device-plugin-ds
     spec:
-      runtimeClassName: nvidia            
-      priorityClassName: system-node-critical  # optional
-      # Only run on nodes labeled gpu=true
+      # runtimeClassName: nvidia not needed for the plugin
+      priorityClassName: system-node-critical
       nodeSelector:
         gpu: "true"
-
-      #Tolerate both the built-in NVIDIA taint and the custom one
       tolerations:
-        # existing toleration for the plugin itself
         - key: nvidia.com/gpu
           operator: Exists
           effect: NoSchedule
-
-        # new toleration so it can schedule onto gpu=true:NoSchedule
         - key: gpu
           operator: Equal
           value: "true"
           effect: NoSchedule
-
       containers:
-      - image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
-        name: nvidia-device-plugin-ctr
-        env:
-          - name: FAIL_ON_INIT_ERROR
-            value: "false"
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
-        volumeMounts:
-          - name: device-plugin
-            mountPath: /var/lib/kubelet/device-plugins
-          # mount the CDI specs from the host
-          - name: cdi
-            mountPath: /etc/cdi
-            readOnly: true
+        - name: nvidia-device-plugin-ctr
+          image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: FAIL_ON_INIT_ERROR
+              value: "false"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: device-plugin
+              mountPath: /var/lib/kubelet/device-plugins
+          # (Optional)
+          #  - name: cdi
+          #    mountPath: /etc/cdi
+          #    readOnly: true
       volumes:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
-        # the host’s CDI directory
-        - name: cdi
-          hostPath:
-            path: /etc/cdi
-            type: DirectoryOrCreate
+        # (Optional)
+        # - name: cdi
+        #   hostPath:
+        #     path: /etc/cdi
+        #     type: DirectoryOrCreate
