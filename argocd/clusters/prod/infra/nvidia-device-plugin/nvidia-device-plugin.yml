@@ -14,6 +14,7 @@ spec:
       labels:
         name: nvidia-device-plugin-ds
     spec:
+      runtimeClassName: nvidia
       priorityClassName: system-node-critical
       nodeSelector:
         gpu: "true"
@@ -30,14 +31,18 @@ spec:
           image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
           imagePullPolicy: IfNotPresent
           env:
-            # tell the plugin how to pass devices (via CDI)
+            # NVML discovery so CDI is allowed
+            - name: DEVICE_DISCOVERY_STRATEGY
+              value: nvml
+            # Use CDI to pass devices to pods (prefer CRI path; fallback to cdi-annotations if needed)
             - name: DEVICE_LIST_STRATEGY
               value: cdi-cri
             - name: FAIL_ON_INIT_ERROR
               value: "false"
           securityContext:
             allowPrivilegeEscalation: false
-            capabilities: { drop: ["ALL"] }
+            capabilities:
+              drop: ["ALL"]
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
@@ -45,3 +50,4 @@ spec:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
+
