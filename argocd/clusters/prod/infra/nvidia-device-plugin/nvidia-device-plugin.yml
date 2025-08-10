@@ -29,6 +29,15 @@ spec:
         - name: nvidia-device-plugin-ctr
           image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
           imagePullPolicy: IfNotPresent
+          env:
+            # Force CDI discovery
+            - name: DEVICE_DISCOVERY_STRATEGY
+              value: cdi
+            # Let the plugin read the host's CDI spec
+            - name: CDI_SPEC_DIR
+              value: /etc/cdi
+            - name: FAIL_ON_INIT_ERROR
+              value: "false"
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -36,7 +45,14 @@ spec:
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
+            - name: cdi
+              mountPath: /etc/cdi
+              readOnly: true
       volumes:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
+        - name: cdi
+          hostPath:
+            path: /etc/cdi
+            type: DirectoryOrCreate
