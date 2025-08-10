@@ -31,12 +31,15 @@ spec:
           image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
           imagePullPolicy: IfNotPresent
           env:
-            # NVML discovery so CDI is allowed
+            # Ensure the plugin discovers GPUs via NVML (uses injected host libs)
             - name: DEVICE_DISCOVERY_STRATEGY
               value: nvml
-            # Use CDI to pass devices to pods (prefer CRI path; fallback to cdi-annotations if needed)
+            # Hand devices to pods via CDI (prefer CRI path; fallback below if needed)
             - name: DEVICE_LIST_STRATEGY
               value: cdi-cri
+            # Critical: look for driver files at root
+            - name: CONTAINER_DRIVER_ROOT
+              value: "/"
             - name: FAIL_ON_INIT_ERROR
               value: "false"
           securityContext:
