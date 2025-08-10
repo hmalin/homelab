@@ -40,6 +40,8 @@ spec:
             # Critical: look for driver files at root
             - name: CONTAINER_DRIVER_ROOT
               value: "/"
+            - name: CDI_SPEC_DIR
+              value: /etc/cdi
             - name: FAIL_ON_INIT_ERROR
               value: "false"
           securityContext:
@@ -53,4 +55,8 @@ spec:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
+        - name: cdi
+          hostPath:
+            path: /etc/cdi
+            type: DirectoryOrCreate    
 
