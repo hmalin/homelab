@@ -35,9 +35,11 @@ spec:
               value: nvml
             # Try CRI first; if it still fails, switch to cdi-annotations
             - name: DEVICE_LIST_STRATEGY
-              value: cdi-annotations
+              value: cdi-cri
             - name: CONTAINER_DRIVER_ROOT
               value: "/"
+            - name: CDI_SPEC_DIR
+              value: /var/run/cdi  
             # Write the plugin's CDI spec where containerd reads it
             - name: FAIL_ON_INIT_ERROR
               value: "false"
