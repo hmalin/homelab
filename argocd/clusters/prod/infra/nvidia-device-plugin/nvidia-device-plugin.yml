@@ -34,9 +34,7 @@ spec:
             - name: DEVICE_DISCOVERY_STRATEGY
               value: nvml
             - name: DEVICE_LIST_STRATEGY
-              value: cdi-cri      # switch to cdi-annotations if CRI CDI isn't supported
-            - name: NVIDIA_DRIVER_ROOT
-              value: /host               
+              value: cdi-cri      # switch to cdi-annotations if CRI CDI isn't supported              
             - name: CONTAINER_DRIVER_ROOT
               value: "/"
             - name: CDI_SPEC_DIR
