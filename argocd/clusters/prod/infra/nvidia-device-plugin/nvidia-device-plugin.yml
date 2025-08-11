@@ -31,30 +31,26 @@ spec:
           image: nvcr.io/nvidia/k8s-device-plugin:v0.17.1
           imagePullPolicy: IfNotPresent
           env:
-            # Ensure the plugin discovers GPUs via NVML (uses injected host libs)
             - name: DEVICE_DISCOVERY_STRATEGY
               value: nvml
-            # Hand devices to pods via CDI (prefer CRI path; fallback below if needed)
+            # Try CRI first; if it still fails, switch to cdi-annotations
             - name: DEVICE_LIST_STRATEGY
-              value: cdi-annotations
-            - name: CDI_SPEC_DIR
-              value: /etc/cdi  
-            # Critical: look for driver files at root
+              value: cdi-cri
             - name: CONTAINER_DRIVER_ROOT
               value: "/"
+            # Write the plugin's CDI spec where containerd reads it
             - name: CDI_SPEC_DIR
               value: /etc/cdi
             - name: FAIL_ON_INIT_ERROR
               value: "false"
           securityContext:
             allowPrivilegeEscalation: false
-            capabilities:
-              drop: ["ALL"]
+            capabilities: { drop: ["ALL"] }
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
             - name: cdi
-              mountPath: /etc/cdi  
+              mountPath: /etc/cdi
       volumes:
         - name: device-plugin
           hostPath:
@@ -62,5 +58,6 @@ spec:
         - name: cdi
           hostPath:
             path: /etc/cdi
-            type: DirectoryOrCreate    
+            type: DirectoryOrCreate
+ 
 
