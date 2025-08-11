@@ -35,6 +35,8 @@ spec:
               value: nvml
             - name: DEVICE_LIST_STRATEGY
               value: cdi-cri      # switch to cdi-annotations if CRI CDI isn't supported
+            - name: NVIDIA_DRIVER_ROOT
+              value: /host               
             - name: CONTAINER_DRIVER_ROOT
               value: "/"
             - name: CDI_SPEC_DIR
@@ -47,6 +49,9 @@ spec:
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
+            - name: host-root
+              mountPath: /host
+              readOnly: true  
             - name: cdi-run
               mountPath: /var/run/cdi
             - name: cdi
@@ -55,6 +60,10 @@ spec:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
+        - name: host-root
+          hostPath:
+            path: /
+            type: Directory    
         - name: cdi-run
           hostPath:
             path: /var/run/cdi
