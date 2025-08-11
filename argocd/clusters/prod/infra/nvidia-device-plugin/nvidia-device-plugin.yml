@@ -36,7 +36,7 @@ spec:
               value: nvml
             # Hand devices to pods via CDI (prefer CRI path; fallback below if needed)
             - name: DEVICE_LIST_STRATEGY
-              value: cdi-cri
+              value: cdi-annotations
             - name: CDI_SPEC_DIR
               value: /etc/cdi  
             # Critical: look for driver files at root
