@@ -36,7 +36,9 @@ spec:
               value: nvml
             # Hand devices to pods via CDI (prefer CRI path; fallback below if needed)
             - name: DEVICE_LIST_STRATEGY
-              value: cdi-annotations
+              value: cdi-cri
+            - name: CDI_SPEC_DIR
+              value: /etc/cdi  
             # Critical: look for driver files at root
             - name: CONTAINER_DRIVER_ROOT
               value: "/"
@@ -51,6 +53,8 @@ spec:
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
+            - name: cdi
+              mountPath: /etc/cdi  
       volumes:
         - name: device-plugin
           hostPath:
