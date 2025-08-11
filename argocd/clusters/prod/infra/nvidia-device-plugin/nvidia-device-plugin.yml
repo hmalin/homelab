@@ -35,12 +35,10 @@ spec:
               value: nvml
             # Try CRI first; if it still fails, switch to cdi-annotations
             - name: DEVICE_LIST_STRATEGY
-              value: cdi-cri
+              value: cdi-annotations
             - name: CONTAINER_DRIVER_ROOT
               value: "/"
             # Write the plugin's CDI spec where containerd reads it
-            - name: CDI_SPEC_DIR
-              value: /etc/cdi
             - name: FAIL_ON_INIT_ERROR
               value: "false"
           securityContext:
@@ -49,12 +47,16 @@ spec:
           volumeMounts:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
+            - name: cdi-run
+              mountPath: /var/run/cdi  
             - name: cdi
               mountPath: /etc/cdi
       volumes:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
+        - name: cdi-run
+          mountPath: /var/run/cdi    
         - name: cdi
           hostPath:
             path: /etc/cdi
