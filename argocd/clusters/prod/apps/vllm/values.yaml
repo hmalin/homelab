@@ -1,0 +1,4 @@
+replicas: 1
+image: 
+  repository: vllm/vllm-openai
+  tag: "latest"

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: vllm-mistral-7b
+description: vllm inference server helm chart
+version: 0.1.0
+appVersion: "latest"
