@@ -37,10 +37,27 @@ spec:
       containers:
       - name: vllm-mistral-7b
         image: vllm/vllm-openai:latest
-        command: ["/bin/sh", "-c"]
-        args: [
-          "vllm serve mistralai/Mistral-7B-Instruct-v0.3 --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024"
-        ]
+        command: ["vllm"]
+        args:
+        - "serve"
+        - "mistralai/Mistral-7B-Instruct-v0.3"
+        - "--trust-remote-code"
+        - "--enable-chunked-prefill"
+        - "--max-num-batched-tokens"
+        - "1024"
+        # VRAM controls
+        - "--tensor-parallel-size"
+        - "1"
+        - "--gpu-memory-utilization"
+        - "0.55"         # start conservative
+        - "--max-model-len"
+        - "1024"         # 1024 is safer on a 10GB card
+        - "--swap-space"
+        - "8"            # GB of host RAM
+        # switch to a quantized checkpoint:
+        # - "--quantization"
+        # - "awq"
+        # and change the model to an AWQ/GPTQ repo.
         env:
         - name: HUGGING_FACE_HUB_TOKEN
           valueFrom:
@@ -49,6 +66,8 @@ spec:
               key: HUGGING_FACE_HUB_TOKEN
         - name: VLLM_LOGGING_LEVEL
           value: DEBUG
+        - name: PYTORCH_CUDA_ALLOC_CONF
+          value: "expandable_segments:True"  
         - name: LD_LIBRARY_PATH
           value: "/usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}"  
         ports:
