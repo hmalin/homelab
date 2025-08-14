@@ -28,7 +28,7 @@ applications:
     chart: nfs-subdir-external-provisioner
     version: 4.0.18
     values:
-      replicaCount: 1
+      replicaCount: 3
       nfs:
         server: 192.168.50.10 #NFS server IP
         path: /volume1/.srv/.unifi-drive/kubestore/.data #NFS share path
