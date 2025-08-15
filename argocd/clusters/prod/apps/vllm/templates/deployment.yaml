@@ -40,7 +40,7 @@ spec:
         command: ["vllm"]
         args:
         - "serve"
-        - "mistralai/Mistral-7B-Instruct-v0.3"
+        - "TheBloke/Mistral-7B-Instruct-v0.2-AWQ"
         - "--trust-remote-code"
         - "--enable-chunked-prefill"
         - "--max-num-batched-tokens"
@@ -49,15 +49,14 @@ spec:
         - "--tensor-parallel-size"
         - "1"
         - "--gpu-memory-utilization"
-        - "0.55"         # start conservative
+        - "0.0"         # start conservative
         - "--max-model-len"
         - "1024"         # 1024 is safer on a 10GB card
         - "--swap-space"
         - "8"            # GB of host RAM
         # switch to a quantized checkpoint:
-        # - "--quantization"
-        # - "awq"
-        # and change the model to an AWQ/GPTQ repo.
+        - "--quantization"
+        - "awq"
         env:
         - name: HUGGING_FACE_HUB_TOKEN
           valueFrom:
