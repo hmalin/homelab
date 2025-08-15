@@ -49,7 +49,7 @@ spec:
         - "--tensor-parallel-size"
         - "1"
         - "--gpu-memory-utilization"
-        - "0.0"         # start conservative
+        - "0.60"         # start conservative
         - "--max-model-len"
         - "1024"         # 1024 is safer on a 10GB card
         - "--swap-space"
