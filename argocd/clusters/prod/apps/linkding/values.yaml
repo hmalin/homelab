@@ -1,4 +1,4 @@
-replicas: 3
+replicas: 1
 image:
   repository: sissbruecker/linkding
   tag: "1.42.0"

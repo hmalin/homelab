@@ -4,13 +4,6 @@ metadata:
   name: linkding
 spec:
   replicas: {{ .Values.replicas }}
-  progressDeadlineSeconds: 600
-  revisionHistoryLimit: 1
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 25%
-      maxSurge: 1
   selector:
     matchLabels:
       app: linkding
@@ -22,6 +15,22 @@ spec:
       containers:
         - name: linkding
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: LD_SUPERUSER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-admin
+                  key: username
+            - name: LD_SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-admin
+                  key: password
+            - name: LD_SUPERUSER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-admin
+                  key: email
           ports:
             - containerPort: 9090
           volumeMounts:
