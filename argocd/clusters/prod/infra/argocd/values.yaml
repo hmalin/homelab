@@ -16,6 +16,11 @@ applications:
     path: argocd/clusters/prod/apps/vllm
     type: helm-git
 
+  - name: homepage
+    namespace: homepage
+    path: argocd/clusters/prod/apps/homepage
+    type: helm-git
+
   # Type 2: A Helm chart from an external repo
   - name: cert-manager
     namespace: cert-manager
