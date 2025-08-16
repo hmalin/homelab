@@ -1,0 +1,8 @@
+replicas: 3
+image:
+  repository: sissbruecker/linkding
+  tag: "v1.42.0"
+
+ingress:
+  enabled: true
+  host: "linkding.malininc.com" # Cloudflare Domain

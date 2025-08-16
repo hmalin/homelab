@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkding
+spec:
+  replicas: {{ .Values.replicas }}
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: linkding
+  template:
+    metadata:
+      labels:
+        app: linkding
+    spec:
+      containers:
+        - name: linkding
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: linkding-data
+              mountPath: /etc/linkding/data
+      volumes:
+        - name: linkding-data
+          persistentVolumeClaim:
+            claimName: linkding-pvc

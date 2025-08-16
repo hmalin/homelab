@@ -21,6 +21,11 @@ applications:
     path: argocd/clusters/prod/apps/homepage
     type: helm-git
 
+  - name: linkding
+    namespace: linkding
+    path: argocd/clusters/prod/apps/linkding
+    type: helm-git  
+
   # Type 2: A Helm chart from an external repo
   - name: cert-manager
     namespace: cert-manager
