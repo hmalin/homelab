@@ -97,12 +97,12 @@ data:
                 node: pm-003
     - Containers:
         - ArgoCD:
-            icon: argocd.svg
+            icon: argo-cd.svg
             href: {{"{{"}}HOMEPAGE_VAR_ArgoCD_URL{{"}}"}}
             description: k3s
     - DNS:
         - AdGaurd1:
-            icon: adguard.svg
+            icon: adguard-home.svg
             href: {{"{{"}}HOMEPAGE_VAR_ADGUARD_URL_1{{"}}"}}
             description: adguard
             widget:
@@ -111,7 +111,7 @@ data:
                 username: {{"{{"}}HOMEPAGE_VAR_ADGUARD_USER1{{"}}"}}
                 password: {{"{{"}}HOMEPAGE_VAR_ADGUARD_API_KEY_1{{"}}"}}
         - AdGuard2:
-            icon: adguard.svg
+            icon: adguard-home.svg
             href: {{"{{"}}HOMEPAGE_VAR_ADGUARD_URL_2{{"}}"}}
             description: adguard
             widget:
@@ -124,11 +124,6 @@ data:
             icon: unifi.svg
             href: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_URL{{"}}"}}
             description: network
-            widget:
-                type: unifi
-                url: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_URL{{"}}"}}
-                username: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_USERNAME{{"}}"}}
-                password: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_PASSWORD{{"}}"}}
     - Storage:
         - UNAS:
             icon: unifi.svg
@@ -144,6 +139,10 @@ data:
             icon: github.svg
             href: https://github.com
             description: source code
+        - IT-tools:
+            icon: it-tools.svg
+            href: https://ittools.malininc.com
+            description: A collection of IT tools
   widgets.yaml: |
     - resources:
         cpu: true
