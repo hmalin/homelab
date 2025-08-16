@@ -67,77 +67,77 @@ data:
     - Hypervisor:
         - Proxmox:
             icon: proxmox.svg
-            href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
+            href: {{"{{"}}HOMEPAGE_VAR_PROXMOX_URL{{"}}"}}
             description: PM-01
             widget:
                 type: proxmox
-                url: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
-                username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
-                password: "{{HOMEPAGE_VAR_PROXMOX_API_KEY}}"
+                url: {{"{{"}}HOMEPAGE_VAR_PROXMOX_URL{{"}}"}}
+                username: {{"{{"}}HOMEPAGE_VAR_PROXMOX_USER{{"}}"}}
+                password: {{"{{"}}HOMEPAGE_VAR_PROXMOX_API_KEY{{"}}"}}
                 node: PM-01
         - Proxmox:
             icon: proxmox.svg
-            href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
+            href: {{"{{"}}HOMEPAGE_VAR_PROXMOX_URL{{"}}"}}
             description: PM-02
             widget:
                 type: proxmox
-                url: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
-                username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
-                password: "{{HOMEPAGE_VAR_PROXMOX_API_KEY}}"
+                url: {{"{{"}}HOMEPAGE_VAR_PROXMOX_URL{{"}}"}}
+                username: {{"{{"}}HOMEPAGE_VAR_PROXMOX_USER{{"}}"}}
+                password: {{"{{"}}HOMEPAGE_VAR_PROXMOX_API_KEY{{"}}"}}
                 node: PM-02
         - Proxmox:
             icon: proxmox.svg
-            href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
+            href: {{"{{"}}HOMEPAGE_VAR_PROXMOX_URL{{"}}"}}
             description: pm-003
             widget:
                 type: proxmox
-                url: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
-                username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
-                password: "{{HOMEPAGE_VAR_PROXMOX_API_KEY}}"
+                url: {{"{{"}}HOMEPAGE_VAR_PROXMOX_URL{{"}}"}}
+                username: {{"{{"}}HOMEPAGE_VAR_PROXMOX_USER{{"}}"}}
+                password: {{"{{"}}HOMEPAGE_VAR_PROXMOX_API_KEY{{"}}"}}
                 node: pm-003
     - Containers:
         - ArgoCD:
             icon: argocd.svg
-            href: "{{HOMEPAGE_VAR_ArgoCD_URL}}"
+            href: {{"{{"}}HOMEPAGE_VAR_ArgoCD_URL{{"}}"}}
             description: k3s
     - DNS:
         - AdGaurd1:
             icon: adguard.svg
-            href: "{{HOMEPAGE_VAR_ADGUARD_URL_1}}"
+            href: {{"{{"}}HOMEPAGE_VAR_ADGUARD_URL_1{{"}}"}}
             description: adguard
             widget:
                 type: adguard
-                url: "{{HOMEPAGE_VAR_ADGUARD_URL_1}}"
-                username: "{{HOMEPAGE_VAR_ADGUARD_USER1}}"
-                password: "{{HOMEPAGE_VAR_ADGUARD_API_KEY_1}}"
+                url: {{"{{"}}HOMEPAGE_VAR_ADGUARD_URL_1{{"}}"}}
+                username: {{"{{"}}HOMEPAGE_VAR_ADGUARD_USER1{{"}}"}}
+                password: {{"{{"}}HOMEPAGE_VAR_ADGUARD_API_KEY_1{{"}}"}}
         - AdGuard2:
             icon: adguard.svg
-            href: "{{HOMEPAGE_VAR_ADGUARD_URL_2}}"
+            href: {{"{{"}}HOMEPAGE_VAR_ADGUARD_URL_2{{"}}"}}
             description: adguard
             widget:
                 type: adguard
-                url: "{{HOMEPAGE_VAR_ADGUARD_URL_2}}"
-                username: "{{HOMEPAGE_VAR_ADGUARD_USER2}}"
-                password: "{{HOMEPAGE_VAR_ADGUARD_API_KEY_2}}"
+                url: {{"{{"}}HOMEPAGE_VAR_ADGUARD_URL_2{{"}}"}}
+                username: {{"{{"}}HOMEPAGE_VAR_ADGUARD_USER2{{"}}"}}
+                password: {{"{{"}}HOMEPAGE_VAR_ADGUARD_API_KEY_2{{"}}"}}
     - Network:
         - UniFi:
             icon: unifi.svg
-            href: "{{HOMEPAGE_VAR_UNIFI_NETWORK_URL}}"
+            href: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_URL{{"}}"}}
             description: network
             widget:
                 type: unifi
-                url: "{{HOMEPAGE_VAR_UNIFI_NETWORK_URL}}"
-                username: "{{HOMEPAGE_VAR_UNIFI_NETWORK_USERNAME}}"
-                password: "{{HOMEPAGE_VAR_UNIFI_NETWORK_PASSWORD}}"
+                url: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_URL{{"}}"}}
+                username: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_USERNAME{{"}}"}}
+                password: {{"{{"}}HOMEPAGE_VAR_UNIFI_NETWORK_PASSWORD{{"}}"}}
     - Storage:
         - UNAS:
             icon: unifi.svg
-            href: "{{HOMEPAGE_VAR_UNAS_URL}}"
+            href: {{"{{"}}HOMEPAGE_VAR_UNAS_URL{{"}}"}}
             description: Unas-pro
     - Media:
         - Jellyfin:
             icon: jellyfin.svg
-            href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+            href: {{"{{"}}HOMEPAGE_VAR_JELLYFIN_URL{{"}}"}}
             description: media server
     - Other:
         - GitHub:
