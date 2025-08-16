@@ -7,5 +7,5 @@ spec:
     app: linkding
   ports:
     - protocol: TCP
-      port: 9090
-      targetPort: http
+      port: 80
+      targetPort: 9090
