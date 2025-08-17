@@ -136,13 +136,17 @@ data:
             description: media server
     - Other:
         - GitHub:
-            icon: github.svg
+            icon: github-light.svg
             href: https://github.com
             description: source code
         - IT-tools:
             icon: it-tools.svg
             href: https://ittools.malininc.com
             description: A collection of IT tools
+        - LINKDING:
+            icon: linkding.svg
+            href: https://linkding.malininc.com/bookmarks
+            description: Bookmark Manager
   widgets.yaml: |
     - resources:
         cpu: true
