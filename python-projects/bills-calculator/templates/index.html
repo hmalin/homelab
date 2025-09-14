@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bill Splitter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  <h1>⚡ Bill Splitter ⚡</h1>
+
+  <form method="POST">
+    <label>💡 Enter Electric Bill:</label>
+    <input type="number" step="0.01" name="electric" required placeholder="e.g. 123.45">
+    <br>
+    <button type="submit">⚡ Calculate</button>
+  </form>
+
+  {% if person_a_total and person_b_total %}
+    <h2>{{ person_a }}'s Total: {{ person_a_total }}</h2>
+    <h2>{{ person_b }}'s Total: {{ person_b_total }}</h2>
+    <p>Total household (incl. electric): {{ bill_total }}</p>
+  {% elif error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+
+</body>
+</html>

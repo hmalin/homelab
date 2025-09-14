@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+    background: radial-gradient(circle, #0d0d24, #080818);
+    color: #00eaff; /* Neon Cyan */
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+}
+
+form {
+    background: rgba(20, 20, 50, 0.9);
+    padding: 20px;
+    border: 2px solid #ff00ff; /* Magenta Glow */
+    box-shadow: 0 0 15px #ff00ff;
+    display: inline-block;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+input {
+    background: #1a1a3d;
+    color: #00eaff;
+    border: 2px solid #00eaff;
+    font-family: 'Orbitron', sans-serif;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+button {
+    background: #ff00ff;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff00ff;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background: black;
+    color: #ff00ff;
+    border: 2px solid #ff00ff;
+    box-shadow: 0 0 20px #ff00ff;
+}
+
+/* Typewriter Effect */
+.result {
+    font-size: 24px;
+    text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #00eaff;
+    width: 0;
+    animation: typing 2s steps(40, end) forwards, blink 0.6s infinite alternate;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    from { border-right-color: #00eaff; }
+    to { border-right-color: transparent; }
+}
