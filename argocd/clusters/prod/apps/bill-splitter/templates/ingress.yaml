@@ -20,4 +20,4 @@ spec:
           service:
             name: bill-splitter
             port:
-              number: 5000
+              number: 80
