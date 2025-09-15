@@ -1,0 +1,5 @@
+apiVersion: v2
+name: bill-splitter
+description: Simple flask web app to split monthly bills
+version: 0.1.0
+appVersion: "0.1.0"

@@ -24,7 +24,12 @@ applications:
   - name: linkding
     namespace: linkding
     path: argocd/clusters/prod/apps/linkding
-    type: helm-git  
+    type: helm-git
+
+  - name: bill-splitter
+    namespace: bill-splitter
+    path: argocd/clusters/prod/apps/bill-splitter
+    type: helm-git
 
   # Type 2: A Helm chart from an external repo
   - name: cert-manager

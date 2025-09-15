@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bill-splitter
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: bill-splitter
+  template:
+    metadata:
+      labels:
+        app: bill-splitter
+    spec:
+      containers:
+      - name: bill-splitter
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        envFrom:
+          - secretRef:
+              name: bill-splitter-secret
+        ports:
+        - containerPort: 5000

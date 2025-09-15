@@ -1,0 +1,9 @@
+replicas: 2
+
+image:
+  repository: ghcr.io/hmalin/bill-splitter
+  tag: "0.1.0"
+
+ingress:
+  enabled: true
+  host: "bills.malininc.com" # Cloudflare Domain
