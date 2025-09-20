@@ -21,3 +21,8 @@ spec:
             name: homepage
             port:
               number: 3000
+            sticky:
+              cookie:
+                httpOnly: true
+                secure: true
+                sameSite: none  
