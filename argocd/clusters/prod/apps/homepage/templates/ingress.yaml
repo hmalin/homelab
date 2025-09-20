@@ -5,6 +5,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: "cloudflare-prod"
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "homepage"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.httponly: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
 spec:
   tls:
   - hosts:
@@ -21,8 +26,3 @@ spec:
             name: homepage
             port:
               number: 3000
-            sticky:
-              cookie:
-                httpOnly: true
-                secure: true
-                sameSite: none  
