@@ -147,6 +147,18 @@ data:
             icon: linkding.svg
             href: https://linkding.malininc.com/bookmarks
             description: Bookmark Manager
+        - AWS:
+            icon: aws.svg
+            href: {{"{{"}}HOMEPAGE_VAR_AWS_URL{{"}}"}}
+            description: AWS login
+        - TwinGate:
+            icon: twingate.svg
+            href: {{"{{"}}HOMEPAGE_VAR_TWINGATE_URL{{"}}"}}
+            description: VPN dashboard
+        - Cloudflare:
+            icon: cloudflare.svg
+            href: https://dash.cloudflare.com
+            description: Cloudflare dashboard
   widgets.yaml: |
     - resources:
         cpu: true
