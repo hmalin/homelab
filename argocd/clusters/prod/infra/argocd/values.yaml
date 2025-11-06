@@ -51,7 +51,7 @@ applications:
       replicaCount: 3
       nfs:
         server: 192.168.50.10 #NFS server IP
-        path: /volume1/.srv/.unifi-drive/kubestore/.data #NFS share path
+        path: /volume/91b0517b-7252-4405-85a9-ffdb955809e1/.srv/.unifi-drive/kubestore/.data #NFS share path
       storageClass:
         name: nfs-client
         defaultClass: true    
