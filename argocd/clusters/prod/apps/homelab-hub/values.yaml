@@ -1,7 +1,7 @@
 replicas: 1
 image:
   repository: raidowl/homelab-hub
-  tag: "latest
+  tag: "latest"
 
 ingress:
   enabled: true
