@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homelab-hub
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "cloudflare-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host | quote }}
+    secretName: homelab-hub-tls
+  rules:
+  - host: {{ .Values.ingress.host | quote }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: homelab-hub
+            port:
+              number: 80

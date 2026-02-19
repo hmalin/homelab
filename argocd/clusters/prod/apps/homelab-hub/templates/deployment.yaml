@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homelab-hub
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: homelab-hub
+  template:
+    metadata:
+      labels:
+        app: homelab-hub
+    spec:
+      containers:
+      - name: homelab-hub
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+          - name: homelab-hub-data
+            mountPath: /data
+      volumes:
+        - name: homelab-hub-data
+          persistentVolumeClaim:
+            claimName: homelab-hub-pvc

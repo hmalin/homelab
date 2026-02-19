@@ -31,6 +31,11 @@ applications:
     path: argocd/clusters/prod/apps/bill-splitter
     type: helm-git
 
+  - name: homelab-hub
+    namespace: homelab-hub
+    path: argocd/clusters/prod/apps/homelab-hub
+    type: helm-git
+
   # Type 2: A Helm chart from an external repo
   - name: cert-manager
     namespace: cert-manager

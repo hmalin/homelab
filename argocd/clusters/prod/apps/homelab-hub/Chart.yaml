@@ -1,0 +1,6 @@
+apiVersion: v2
+name: homelab-hub
+description: web application for managing and visualizing home lab infrastructure.
+type: application
+version: 0.1.0
+appVersion: "latest"

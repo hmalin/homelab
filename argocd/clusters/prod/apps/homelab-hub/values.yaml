@@ -1,0 +1,8 @@
+replicas: 1
+image:
+  repository: raidowl/homelab-hub
+  tag: "latest
+
+ingress:
+  enabled: true
+  host: "hub.malininc.com"
