@@ -12,6 +12,17 @@ spec:
       labels:
         app: homelab-hub
     spec:
+      initContainers:
+      - name: initialize-db
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        # TRICK THE APP: 'stamp' loads env.py (creating tables), then just marks the migration as done.
+        command: ["alembic", "stamp", "head"]
+        volumeMounts:
+        - name: homelab-hub-data
+          mountPath: /data
+        env:
+        - name: DATABASE_URL
+          value: sqlite:////data/homelab-hub.db
       containers:
       - name: homelab-hub
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
