@@ -134,11 +134,7 @@ data:
             icon: jellyfin.svg
             href: {{"{{"}}HOMEPAGE_VAR_JELLYFIN_URL{{"}}"}}
             description: media server
-    - Other:
-        - GitHub:
-            icon: github-light.svg
-            href: https://github.com
-            description: source code
+    - Apps:
         - IT-tools:
             icon: it-tools.svg
             href: https://ittools.malininc.com
@@ -147,6 +143,23 @@ data:
             icon: linkding.svg
             href: https://linkding.malininc.com/bookmarks
             description: Bookmark Manager
+        - HomeLabHub:
+            icon: homehub.svg
+            href: https://hub.malininc.com
+            description: Home lab tracking
+        - BillCalculator:
+            icon: python.svg
+            href: https://bills.malininc.com
+            description: Monthly bill calculator        
+    - External Apps:
+        - PersonalSite:
+            icon: aws.svg
+            href: https://lloydmalin.com
+            description: Personal Portfolio
+        - GitHub:
+            icon: github-light.svg
+            href: https://github.com
+            description: source code
         - AWS:
             icon: aws.svg
             href: {{"{{"}}HOMEPAGE_VAR_AWS_URL{{"}}"}}
